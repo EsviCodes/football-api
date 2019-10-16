@@ -1,5 +1,6 @@
 // Import express.
 const express = require("express");
+const db = require("./db");
 
 // Declare a constant named app and set it to the output of the express function.
 const app = express();

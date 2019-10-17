@@ -1,8 +1,10 @@
+// THE NAME OF THE ROUTE SHOULD BE PLURAL
+
 // Import the Router class from express.
 const { Router } = require("express");
 
 // Import the Team model class.
-const Teams = require("./model");
+const Team = require("./model");
 
 // Instantiate a router.
 const router = new Router();
@@ -16,7 +18,7 @@ const router = new Router();
 // Add a then callback. It will receive the list of teams. Send the list as the response.
 // Add a catch callback. It will receive an error if it is thrown. Pass it to next.
 router.get("/teams", (request, response, next) => {
-  Teams.findAll()
+  Team.findAll()
     .then(team => response.send(team))
     //.catch(error => next(error)); --> wrong call next right away
     .catch(next);
@@ -27,14 +29,14 @@ router.get("/teams", (request, response, next) => {
 
 // Create a new team
 router.post("/teams", (req, res, next) => {
-  Teams.create(req.body)
+  Team.create(req.body)
     .then(team => res.json(team))
     .catch(next);
 });
 
 // Get a team's information
 router.get("/teams/:id", (req, res, next) => {
-  Teams.findByPk(req.params.id)
+  Team.findByPk(req.params.id)
     .then(team => {
       if (!team) {
         res.status(404).end();
@@ -47,7 +49,7 @@ router.get("/teams/:id", (req, res, next) => {
 
 // Update a team's information
 router.put("/teams/:id", (req, res, next) => {
-  Teams.findByPk(req.params.id)
+  Team.findByPk(req.params.id)
     .then(team => {
       if (team) {
         team.update(req.body).then(team => res.json(team));

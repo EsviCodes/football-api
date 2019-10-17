@@ -1,17 +1,18 @@
 // Import Sequelize & Team
 const Sequelize = require("sequelize");
-const Teams = require("../teams/model");
+const Team = require("../team/model");
 
 // Import db.js as a constant named db.
 const db = require("../db");
 
-const Players = db.define("player", {
+const Player = db.define("player", {
   // attributes
   name: Sequelize.STRING,
   number: Sequelize.INTEGER
 });
 
 //Tell Sequelize that a Player belongs to a Team by adding this line below your Player model definition:
-Players.belongsTo(Teams);
+Player.belongsTo(Team);
+// ADD Team.hasmany(Player) --> should be in here but I haven't applied this yet
 
-module.exports = Players;
+module.exports = Player;

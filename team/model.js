@@ -1,3 +1,5 @@
+// THE NAME OF THE MODEL SHOULD BE ENKELVOUD
+
 // Import Sequelize.
 const Sequelize = require("sequelize");
 
@@ -8,10 +10,10 @@ const db = require("../db");
 // Set the variable equal to a call to db.define.
 // The first argument to define is the model name. Call it 'team'.
 // The second argument is an object that defines the table's fields. Add one string field called name and give it the type Sequelize.STRING.
-const Teams = db.define("team", {
+const Team = db.define("team", {
   // attributes
   name: Sequelize.STRING
 });
 
 // Export the model.
-module.exports = Teams;
+module.exports = Team;

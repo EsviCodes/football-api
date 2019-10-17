@@ -8,10 +8,10 @@ const db = require("../db");
 // Set the variable equal to a call to db.define.
 // The first argument to define is the model name. Call it 'team'.
 // The second argument is an object that defines the table's fields. Add one string field called name and give it the type Sequelize.STRING.
-const Team = db.define("team", {
+const Teams = db.define("team", {
   // attributes
   name: Sequelize.STRING
 });
 
 // Export the model.
-module.exports = Team;
+module.exports = Teams;

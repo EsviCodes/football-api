@@ -2,28 +2,30 @@
 const { Router } = require("express");
 
 // Import the Player model class.
-const Player = require("./model");
+const Players = require("./model");
 
 // Instantiate a router.
 const router = new Router();
 
-router.get("/player", (request, response, next) => {
-  Player.findAll()
+// TIP: testing the route with res.send('Some message')
+
+router.get("/players", (request, response, next) => {
+  Players.findAll()
     .then(player => response.send(player))
     //.catch(error => next(error)); --> wrong call next right away
     .catch(next);
 });
 
 // Create a new player
-router.post("/player", (req, res, next) => {
-  Player.create(req.body)
+router.post("/players", (req, res, next) => {
+  Players.create(req.body)
     .then(player => res.json(player))
     .catch(next);
 });
 
 // Get a player's information
-router.get("/player/:id", (req, res, next) => {
-  Player.findByPk(req.params.id)
+router.get("/players/:id", (req, res, next) => {
+  Players.findByPk(req.params.id)
     .then(player => {
       if (!player) {
         res.status(404).end();
@@ -35,8 +37,8 @@ router.get("/player/:id", (req, res, next) => {
 });
 
 // Update a player's information
-router.put("/player/:id", (req, res, next) => {
-  Player.findByPk(req.params.id)
+router.put("/players/:id", (req, res, next) => {
+  Players.findByPk(req.params.id)
     .then(player => {
       if (player) {
         player.update(req.body).then(player => res.json(player));
@@ -46,6 +48,8 @@ router.put("/player/:id", (req, res, next) => {
     })
     .catch(next);
 });
+
+// Add Delete for full REST
 
 // Export the router.
 module.exports = router;

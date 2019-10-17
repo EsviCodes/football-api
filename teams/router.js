@@ -2,10 +2,12 @@
 const { Router } = require("express");
 
 // Import the Team model class.
-const Team = require("./model");
+const Teams = require("./model");
 
 // Instantiate a router.
 const router = new Router();
+
+// TIP: testing the route with res.send('Some message')
 
 // Register a GET endpoint on the '/team' route. This route will get all the team rows from the table.
 // The route handler should take three arguments: the request (or req), the response (or res), and the next function.
@@ -13,8 +15,8 @@ const router = new Router();
 // Call the Team.findAll method.
 // Add a then callback. It will receive the list of teams. Send the list as the response.
 // Add a catch callback. It will receive an error if it is thrown. Pass it to next.
-router.get("/team", (request, response, next) => {
-  Team.findAll()
+router.get("/teams", (request, response, next) => {
+  Teams.findAll()
     .then(team => response.send(team))
     //.catch(error => next(error)); --> wrong call next right away
     .catch(next);
@@ -24,15 +26,15 @@ router.get("/team", (request, response, next) => {
 // Add a then callback that sends the newly created team as a the response. Add a catch callback where you pass any caught errors to next.
 
 // Create a new team
-router.post("/team", (req, res, next) => {
-  Team.create(req.body)
+router.post("/teams", (req, res, next) => {
+  Teams.create(req.body)
     .then(team => res.json(team))
     .catch(next);
 });
 
 // Get a team's information
-router.get("/team/:id", (req, res, next) => {
-  Team.findByPk(req.params.id)
+router.get("/teams/:id", (req, res, next) => {
+  Teams.findByPk(req.params.id)
     .then(team => {
       if (!team) {
         res.status(404).end();
@@ -44,17 +46,19 @@ router.get("/team/:id", (req, res, next) => {
 });
 
 // Update a team's information
-router.put("/team/:id", (req, res, next) => {
-  Team.findByPk(req.params.id)
+router.put("/teams/:id", (req, res, next) => {
+  Teams.findByPk(req.params.id)
     .then(team => {
       if (team) {
-        team.update(req.body).then(team => res.json(team));
+        Teams.update(req.body).then(team => res.json(team));
       } else {
         res.status(404).end();
       }
     })
     .catch(next);
 });
+
+// Add Delete for full REST
 
 // Export the router.
 module.exports = router;

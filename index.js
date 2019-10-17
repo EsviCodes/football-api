@@ -2,10 +2,10 @@
 const express = require("express");
 // const db = require("./db");
 //const Team = require("./team/model");
-const teamRouter = require("./team/router");
-const playerRouter = require("./player/router");
+const teamsRouter = require("./teams/router");
+const playersRouter = require("./players/router");
 const bodyParser = require("body-parser");
-const Player = require("./player/model");
+//const Players = require("./players/model");
 
 // Declare a constant named app and set it to the output of the express function.
 const app = express();
@@ -16,9 +16,9 @@ const port = process.env.PORT || 4000;
 
 // Middleware
 //app.use(bodyParser.urlencoded({ extended: false }));
-app.use(jsonParser);
-app.use(teamRouter);
-app.use(playerRouter);
+app.use(jsonParser); // USE THESE BEFORE THE ROUTE!
+app.use(teamsRouter);
+app.use(playersRouter);
 
 // Pass the port and a logging function to app.listen to start the server.
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

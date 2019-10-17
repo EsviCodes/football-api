@@ -5,6 +5,7 @@ const { Router } = require("express");
 
 // Import the Team model class.
 const Team = require("./model");
+const Player = require("../player/model");
 
 // Instantiate a router.
 const router = new Router();
@@ -36,7 +37,7 @@ router.post("/teams", (req, res, next) => {
 
 // Get a team's information
 router.get("/teams/:id", (req, res, next) => {
-  Team.findByPk(req.params.id)
+  Team.findByPk(req.params.id, { include: [Player] })
     .then(team => {
       if (!team) {
         res.status(404).end();
@@ -49,7 +50,7 @@ router.get("/teams/:id", (req, res, next) => {
 
 // Update a team's information
 router.put("/teams/:id", (req, res, next) => {
-  Team.findByPk(req.params.id)
+  Team.findByPk(req.params.id, { include: [Player] })
     .then(team => {
       if (team) {
         team.update(req.body).then(team => res.json(team));

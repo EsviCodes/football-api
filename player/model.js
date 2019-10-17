@@ -13,6 +13,6 @@ const Player = db.define("player", {
 
 //Tell Sequelize that a Player belongs to a Team by adding this line below your Player model definition:
 Player.belongsTo(Team);
-// ADD Team.hasmany(Player) --> should be in here but I haven't applied this yet
+Team.hasMany(Player);
 
 module.exports = Player;

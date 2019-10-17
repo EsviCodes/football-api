@@ -61,6 +61,24 @@ router.put("/teams/:id", (req, res, next) => {
 });
 
 // Add Delete for full REST
+router.delete("/teams/:id", (req, res, next) => {
+  // console.log('WHAT IS REQ.PARAMS before we get wrecked by params', req.params)
+  // res.send('Some people want to watch the world burn') // -> route works
+
+  Team.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(numDeleted => {
+      if (numDeleted) {
+        res.status(204).end();
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch(next);
+});
 
 // Export the router.
 module.exports = router;

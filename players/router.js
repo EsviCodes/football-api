@@ -1,5 +1,6 @@
 // Import the Router class from express.
 const { Router } = require("express");
+const Teams = require("../teams/model");
 
 // Import the Player model class.
 const Players = require("./model");
@@ -12,7 +13,6 @@ const router = new Router();
 router.get("/players", (request, response, next) => {
   Players.findAll()
     .then(player => response.send(player))
-    //.catch(error => next(error)); --> wrong call next right away
     .catch(next);
 });
 
@@ -25,7 +25,7 @@ router.post("/players", (req, res, next) => {
 
 // Get a player's information
 router.get("/players/:id", (req, res, next) => {
-  Players.findByPk(req.params.id)
+  Players.findByPk(req.params.id, { include: [Teams] })
     .then(player => {
       if (!player) {
         res.status(404).end();
@@ -38,7 +38,7 @@ router.get("/players/:id", (req, res, next) => {
 
 // Update a player's information
 router.put("/players/:id", (req, res, next) => {
-  Players.findByPk(req.params.id)
+  Players.findByPk(req.params.id, { include: [Teams] })
     .then(player => {
       if (player) {
         Players.update(req.body).then(player => res.json(player));

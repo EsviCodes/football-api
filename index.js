@@ -15,7 +15,7 @@ const jsonParser = bodyParser.json();
 const port = process.env.PORT || 4000;
 
 // Middleware
-//app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.urlencoded({ extended: false })); // not mandotary
 app.use(jsonParser); // USE THESE BEFORE THE ROUTE!
 app.use(teamsRouter);
 app.use(playersRouter);

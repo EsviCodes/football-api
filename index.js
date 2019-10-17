@@ -3,6 +3,7 @@ const express = require("express");
 // const db = require("./db");
 //const Team = require("./team/model");
 const teamRouter = require("./team/router");
+const playerRouter = require("./player/router");
 const bodyParser = require("body-parser");
 const Player = require("./player/model");
 
@@ -17,6 +18,7 @@ const port = process.env.PORT || 4000;
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(jsonParser);
 app.use(teamRouter);
+app.use(playerRouter);
 
 // Pass the port and a logging function to app.listen to start the server.
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

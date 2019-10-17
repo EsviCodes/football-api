@@ -20,8 +20,6 @@ router.get("/team", (request, response, next) => {
     .catch(next);
 });
 
-// THIS DIDN't WORK, BUT IT DID WORK WHEN I USED app.post() IN INDEX.JS ??
-
 // Register a POST endpoint for teams in team/router.js. The route should listen for POST requests on the /team route. Pass the request's body to Team.create, which sequelize will use to populate the row's fields.
 // Add a then callback that sends the newly created team as a the response. Add a catch callback where you pass any caught errors to next.
 

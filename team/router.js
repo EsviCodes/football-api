@@ -25,12 +25,14 @@ router.get("/team", (request, response, next) => {
 // Register a POST endpoint for teams in team/router.js. The route should listen for POST requests on the /team route. Pass the request's body to Team.create, which sequelize will use to populate the row's fields.
 // Add a then callback that sends the newly created team as a the response. Add a catch callback where you pass any caught errors to next.
 
+// Create a new team
 router.post("/team", (req, res, next) => {
   Team.create(req.body)
     .then(team => res.json(team))
     .catch(next);
 });
 
+// Get a team's information
 router.get("/team/:id", (req, res, next) => {
   Team.findByPk(req.params.id)
     .then(team => {
@@ -38,6 +40,19 @@ router.get("/team/:id", (req, res, next) => {
         res.status(404).end();
       } else {
         res.json(team);
+      }
+    })
+    .catch(next);
+});
+
+// Update a team's information
+router.put("/team/:id", (req, res, next) => {
+  Team.findByPk(req.params.id)
+    .then(team => {
+      if (team) {
+        team.update(req.body).then(team => res.json(team));
+      } else {
+        res.status(404).end();
       }
     })
     .catch(next);

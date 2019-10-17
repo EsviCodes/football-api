@@ -41,7 +41,7 @@ router.put("/players/:id", (req, res, next) => {
   Players.findByPk(req.params.id, { include: [Teams] })
     .then(player => {
       if (player) {
-        Players.update(req.body).then(player => res.json(player));
+        player.update(req.body).then(player => res.json(player));
       } else {
         res.status(404).end();
       }

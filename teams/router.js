@@ -50,7 +50,7 @@ router.put("/teams/:id", (req, res, next) => {
   Teams.findByPk(req.params.id)
     .then(team => {
       if (team) {
-        Teams.update(req.body).then(team => res.json(team));
+        team.update(req.body).then(team => res.json(team));
       } else {
         res.status(404).end();
       }

@@ -7,8 +7,8 @@ const databaseUrl =
 
 const db = new Sequelize(databaseUrl);
 
-db.sync({ force: true }) // NOTE: --> use if want to delete db on heroku. Deploy again with sync()
-  //db.sync()
+//db.sync({ force: true }) // NOTE: --> use if want to delete db on heroku. Deploy again with sync()
+db.sync()
   .then(() => console.log("Database schema updated"))
   .catch(console.error);
 

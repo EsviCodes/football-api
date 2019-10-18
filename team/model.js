@@ -12,7 +12,8 @@ const db = require("../db");
 // The second argument is an object that defines the table's fields. Add one string field called name and give it the type Sequelize.STRING.
 const Team = db.define("team", {
   // attributes
-  name: Sequelize.STRING
+  name: Sequelize.STRING,
+  description: Sequelize.STRING
 });
 
 // Export the model.
